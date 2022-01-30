@@ -1,5 +1,7 @@
 export const initialState = {
   friends: [],
+  wakeTime: [7, 0],
+  sleepTime: [23, 0],
 };
 
 export const SET_LOCAL_OFFSET = 1;
@@ -7,12 +9,15 @@ export const LOAD_STATE = 2;
 export const ADD_NEW_FRIEND = 3;
 export const REMOVE_FRIEND = 4;
 export const EDIT_FRIEND = 5;
+export const SET_AWAKETIMES = 6;
 export const actions = {
   SET_LOCAL_OFFSET,
   LOAD_STATE,
   ADD_NEW_FRIEND,
   REMOVE_FRIEND,
   EDIT_FRIEND,
+  SET_WAKETIME,
+  SET_AWAKETIMES,
 };
 
 const isDev =
@@ -29,7 +34,10 @@ export const reducer = (state, action) => {
 
   switch (action.type) {
     case LOAD_STATE:
-      return action.payload;
+      return {
+        ...initialState,
+        ...action.payload
+      };
     case SET_LOCAL_OFFSET:
       return {
         ...state,
@@ -66,6 +74,14 @@ export const reducer = (state, action) => {
         ...state,
         friends: state.friends.map((friend) => friend.id === id ? editedFriend : friend),
       };
+    }
+    case SET_AWAKETIMES: {
+      const { wakeTime, sleepTime } = action.payload;
+      return {
+        ...state,
+        wakeTime,
+        sleepTime
+      }
     }
     default:
       throw new Error();

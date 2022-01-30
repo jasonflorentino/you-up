@@ -3,7 +3,6 @@ import {
   useContext,
   useMemo,
   useReducer,
-  useEffect,
 } from "react";
 import { reducer, initialState } from "./reducer";
 
