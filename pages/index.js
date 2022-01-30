@@ -46,6 +46,7 @@ export default function Home({ timeZones }) {
       type: SET_LOCAL_OFFSET,
       payload: { localOffset: localOffsetMs },
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

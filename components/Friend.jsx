@@ -81,7 +81,7 @@ export default function Friend({ friend }) {
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure you want to remove this friend? You can't undo this action.
+              Are you sure you want to remove this friend? You can&apos;t undo this action.
             </AlertDialogBody>
 
             <AlertDialogFooter>

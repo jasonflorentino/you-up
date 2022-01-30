@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import {
   FormControl,
   FormLabel,
@@ -17,55 +17,67 @@ import { NotAllowedIcon, CheckIcon } from "@chakra-ui/icons";
 
 import { useAppContext } from "../appState/AppContext";
 
-export default function TimeZonePicker({ timezones, input, setInput, setValid }) {
+export default function TimeZonePicker({
+  timezones,
+  input,
+  setInput,
+  setValid,
+}) {
   const { state } = useAppContext();
   const [checkForError, setCheckForError] = useState(false);
   const localOffset = state.localOffset;
 
-  const inputIsValid = (input) => {
-    return input !== '' && timezones[input] !== undefined;
-  }
+  const inputIsValid = useCallback(
+    (input) => {
+      return input !== "" && timezones[input] !== undefined;
+    },
+    [timezones]
+  );
 
-  const handleInputChange = (e) => {
-    if (!checkForError) {
-      setCheckForError(true);
-    }
+  const handleInputChange = useCallback(
+    (e) => {
+      if (!checkForError) {
+        setCheckForError(true);
+      }
 
-    const newVal = e.target.value;
+      const newVal = e.target.value;
 
-    if (inputIsValid(newVal)) {
-      setValid(true);
-    } else {
-      setValid(false);
-    }
+      if (inputIsValid(newVal)) {
+        setValid(true);
+      } else {
+        setValid(false);
+      }
 
-    setInput(newVal);
-  };
+      setInput(newVal);
+    },
+    [checkForError, setInput, setCheckForError, inputIsValid, setValid]
+  );
 
   const hasError = !inputIsValid(input);
 
-  const optionsComponents = useMemo(() => Object.entries(timezones)
-    .map(([name, offsetms]) => {
-      const hours = msToHours(offsetms + localOffset);
-      return (
-        <Button
-          size="sm"
-          mr={3}
-          mb={3}
-          key={name}
-          onClick={() => handleInputChange({target: {value: name}})}
-        >
-          {name.replace(/_/g, " ")} ({hours > 0 ? "+" : ""}
-          {hours})
-        </Button>
-      );
-    }), [timezones, localOffset]);
+  const optionsComponents = useMemo(
+    () =>
+      Object.entries(timezones).map(([name, offsetms]) => {
+        const hours = msToHours(offsetms + localOffset);
+        return (
+          <Button
+            size="sm"
+            mr={3}
+            mb={3}
+            key={name}
+            onClick={() => handleInputChange({ target: { value: name } })}
+          >
+            {name.replace(/_/g, " ")} ({hours > 0 ? "+" : ""}
+            {hours})
+          </Button>
+        );
+      }),
+    [timezones, localOffset, handleInputChange]
+  );
 
-  const options = optionsComponents.filter(({key}) => {
-    return key
-      .toLowerCase()
-      .includes(input.toLowerCase().replace(/ /g, "_"));
-  })
+  const options = optionsComponents.filter(({ key }) => {
+    return key.toLowerCase().includes(input.toLowerCase().replace(/ /g, "_"));
+  });
 
   return (
     <VStack p={4} spacing={4} align="stretch">
@@ -101,7 +113,7 @@ export default function TimeZonePicker({ timezones, input, setInput, setValid })
           <FormHelperText>What timezone are they in?</FormHelperText>
         )}
       </FormControl>
-      <Box maxH={'xs'} overflow={'auto'}>
+      <Box maxH={"xs"} overflow={"auto"}>
         <Flex wrap="wrap">{options}</Flex>
       </Box>
     </VStack>

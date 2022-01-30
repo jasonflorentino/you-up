@@ -13,11 +13,17 @@ export const actions = {
   REMOVE_FRIEND,
 };
 
+const isDev =
+  process.env.NEXT_PUBLIC_VERCEL_ENV === "development" ||
+  process.env.VERCEL_ENV === "development";
+
 export const reducer = (state, action) => {
-  console.groupCollapsed(getActionFromEnum(action.type));
-  console.log("ACTION", action);
-  console.log("CURRENT_STATE", state);
-  console.groupEnd(getActionFromEnum(action.type));
+  if (isDev) {
+    console.groupCollapsed(getActionFromEnum(action.type));
+    console.log("ACTION", action);
+    console.log("CURRENT_STATE", state);
+    console.groupEnd(getActionFromEnum(action.type));
+  }
 
   switch (action.type) {
     case LOAD_STATE:
@@ -32,17 +38,17 @@ export const reducer = (state, action) => {
       const newFriend = {
         id: makeFriendId(state.friends.length),
         timezone,
-        name
-      }
+        name,
+      };
       return {
         ...state,
-        friends: [newFriend, ...state.friends]
+        friends: [newFriend, ...state.friends],
       };
     case REMOVE_FRIEND:
       const { id } = action.payload;
       return {
         ...state,
-        friends: state.friends.filter((friend) => friend.id !== id)
+        friends: state.friends.filter((friend) => friend.id !== id),
       };
     default:
       throw new Error();
@@ -54,6 +60,6 @@ function getActionFromEnum(num) {
   return entry[0];
 }
 
-function makeFriendId(salt = '') {
-  return 'f' + Date.now() + '-' + salt;
+function makeFriendId(salt = "") {
+  return "f" + Date.now() + "-" + salt;
 }
