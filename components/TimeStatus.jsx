@@ -22,7 +22,7 @@ export default function TimeStatus({ timezone }) {
 
   return (
     <HStack spacing={4}>
-      <Heading color={isAwake ? 'yellow.400' : 'gray.600'} size='md'>{isAwake? '👋 Awake' : '💤 Asleep'}</Heading>;
+      <Heading color={isAwake ? 'yellow.400' : 'gray.600'} size={{base: 'xs', md: 'md'}}>{isAwake? '👋 Awake' : '💤 Asleep'}</Heading>;
       <Text>{hours < 10 ? '0' + hours : hours}:{minutes < 10 ? '0' + minutes : minutes}</Text>;
       <Text>{offsetHours >= 0 ? `+${offsetHours}` : offsetHours}h</Text>;
     </HStack>

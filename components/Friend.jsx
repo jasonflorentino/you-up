@@ -12,6 +12,7 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   Button,
+  useBreakpointValue
 } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
@@ -24,6 +25,7 @@ export default function Friend({ friend }) {
   const onCancelRef = useRef();
   const { dispatch } = useAppContext();
   const { name, timezone, id } = friend;
+  const sizes = useBreakpointValue({base: 'sm', md: 'md'})
 
   const handleDeleteClick = () => {
     setAlert(true);
@@ -43,24 +45,24 @@ export default function Friend({ friend }) {
   return (
     <li>
       <Flex direction={"row"} alignItems={"center"}>
-        <Checkbox size="lg">
-          <Heading as="h4" size="md">
+        <Checkbox size={sizes}>
+          <Heading as="h4" size={{base: 'xs', md: 'md'}}>
             {name}
           </Heading>
         </Checkbox>
         <Spacer />
           <TimeStatus timezone={timezone} />
         <IconButton
-          ml={4}
-          size={"md"}
+          ml={{base: 2, md: 4}}
+          size={sizes}
           icon={<EditIcon />}
           colorScheme="blue"
           variant="ghost"
           aria-label="Edit Friend"
         />
         <IconButton
-          ml={2}
-          size={"md"}
+          ml={{base: 1, md: 2}}
+          size={sizes}
           icon={<DeleteIcon />}
           colorScheme="red"
           variant="ghost"

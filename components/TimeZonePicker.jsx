@@ -12,6 +12,7 @@ import {
   InputLeftElement,
   InputRightElement,
   Box,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { NotAllowedIcon, CheckIcon } from "@chakra-ui/icons";
 
@@ -24,6 +25,7 @@ export default function TimeZonePicker({
   setValid,
 }) {
   const { state } = useAppContext();
+  const buttonSizes = useBreakpointValue({base: 'xs', md: 'sm'});
   const [checkForError, setCheckForError] = useState(false);
   const localOffset = state.localOffset;
 
@@ -61,7 +63,7 @@ export default function TimeZonePicker({
         const hours = msToHours(offsetms + localOffset);
         return (
           <Button
-            size="sm"
+            size={buttonSizes}
             mr={3}
             mb={3}
             key={name}
@@ -72,7 +74,7 @@ export default function TimeZonePicker({
           </Button>
         );
       }),
-    [timezones, localOffset, handleInputChange]
+    [timezones, localOffset, handleInputChange, buttonSizes]
   );
 
   const options = optionsComponents.filter(({ key }) => {
