@@ -92,11 +92,11 @@ export default function Home({ timeZones }) {
             <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏰</text></svg>" />
           </Head>
           <main>
-            <HStack p={4}>
+            <HStack p={4} justifyContent='space-between'>
               <Heading size="lg">⏰ You Up?</Heading>
+              <ColorModeToggle />
             </HStack>
             <HStack p={4} justifyContent={"flex-end"}>
-              <ColorModeToggle />
               <Button
                 size={addButtonSizes}
                 onClick={() => setShowForm(true)}
