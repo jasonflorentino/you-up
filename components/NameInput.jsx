@@ -16,8 +16,8 @@ export default function NameInput({ input, setInput, setValid }) {
   const [checkForError, setCheckForError] = useState(false);
 
   const inputIsValid = (input) => {
-    return input !== '';
-  }
+    return input !== "";
+  };
 
   const handleChange = (e) => {
     if (!checkForError) {
@@ -37,7 +37,7 @@ export default function NameInput({ input, setInput, setValid }) {
   const hasError = !inputIsValid(input);
 
   return (
-    <VStack p={4} spacing={4} align="stretch">
+    <VStack px={2} spacing={4} align="stretch">
       <FormControl isInvalid={checkForError && hasError} isRequired={true}>
         <FormLabel htmlFor="name">Name</FormLabel>
         <InputGroup>
@@ -63,9 +63,7 @@ export default function NameInput({ input, setInput, setValid }) {
           </InputRightElement>
         </InputGroup>
         {checkForError && hasError ? (
-          <FormErrorMessage>
-            A name is required.
-          </FormErrorMessage>
+          <FormErrorMessage>A name is required.</FormErrorMessage>
         ) : (
           <FormHelperText>What&apos;s their name?</FormHelperText>
         )}

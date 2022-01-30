@@ -25,7 +25,7 @@ export default function TimeZonePicker({
   setValid,
 }) {
   const { state } = useAppContext();
-  const buttonSizes = useBreakpointValue({base: 'xs', md: 'sm'});
+  const buttonSizes = useBreakpointValue({ base: "xs", md: "sm" });
   const [checkForError, setCheckForError] = useState(false);
   const localOffset = state.localOffset;
 
@@ -64,8 +64,8 @@ export default function TimeZonePicker({
         return (
           <Button
             size={buttonSizes}
-            mr={3}
-            mb={3}
+            mr={{ base: 2, sm: 3 }}
+            mb={{ base: 2, sm: 3 }}
             key={name}
             onClick={() => handleInputChange({ target: { value: name } })}
           >
@@ -82,7 +82,7 @@ export default function TimeZonePicker({
   });
 
   return (
-    <VStack p={4} spacing={4} align="stretch">
+    <VStack px={2} spacing={4} align="stretch">
       <FormControl isInvalid={checkForError && hasError} isRequired={true}>
         <FormLabel htmlFor="timezone">Timezone</FormLabel>
         <InputGroup>
@@ -97,6 +97,7 @@ export default function TimeZonePicker({
             id="timezone"
             type="text"
             value={input}
+            placeholder="Vancouver"
             onChange={handleInputChange}
           />
           <InputRightElement>
@@ -115,7 +116,7 @@ export default function TimeZonePicker({
           <FormHelperText>What timezone are they in?</FormHelperText>
         )}
       </FormControl>
-      <Box maxH={"xs"} overflow={"auto"}>
+      <Box maxH={{ base: 40, sm: "xs" }} overflow={"auto"}>
         <Flex wrap="wrap">{options}</Flex>
       </Box>
     </VStack>
