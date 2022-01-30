@@ -30,9 +30,9 @@ import {
 const STORAGE_NAME = "youUp";
 
 /**
- * @param {{ timeZones: { ZoneName: GMTOffsetMs }}} props
+ * @param {{ timezones: { ZoneName: GMTOffsetMs }}} props
  */
-export default function Home({ timeZones }) {
+export default function Home({ timezones }) {
   const { state, dispatch } = useAppContext();
   const [showForm, setShowForm] = useState(false);
 
@@ -84,7 +84,7 @@ export default function Home({ timeZones }) {
   const addButtonSizes = useBreakpointValue({ base: "sm", sm: 'md', md: "lg" });
 
   return (
-    <TimezoneContext.Provider value={timeZones}>
+    <TimezoneContext.Provider value={timezones}>
       <Flex justifyContent={"center"}>
         <Flex flexDirection="column" w={"100%"} maxW={"1080px"}>
           <Head>
@@ -156,16 +156,16 @@ export async function getStaticProps() {
     };
   }
 
-  const timeZones = new Map();
+  const timezones = new Map();
   data.zones.forEach((zone) => {
     const { zoneName, gmtOffset } = zone;
     // gmtOffset from API is current offset in seconds - convert it to ms.
-    timeZones.set(zoneName, gmtOffset * 1000);
+    timezones.set(zoneName, gmtOffset * 1000);
   });
 
   return {
     props: {
-      timeZones: Object.fromEntries(timeZones),
+      timezones: Object.fromEntries(timezones),
     },
   };
 }
