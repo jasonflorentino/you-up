@@ -6,11 +6,13 @@ export const SET_LOCAL_OFFSET = 1;
 export const LOAD_STATE = 2;
 export const ADD_NEW_FRIEND = 3;
 export const REMOVE_FRIEND = 4;
+export const EDIT_FRIEND = 5;
 export const actions = {
   SET_LOCAL_OFFSET,
   LOAD_STATE,
   ADD_NEW_FRIEND,
   REMOVE_FRIEND,
+  EDIT_FRIEND,
 };
 
 const isDev =
@@ -33,7 +35,7 @@ export const reducer = (state, action) => {
         ...state,
         localOffset: action.payload.localOffset,
       };
-    case ADD_NEW_FRIEND:
+    case ADD_NEW_FRIEND: {
       const { name, timezone } = action.payload;
       const newFriend = {
         id: makeFriendId(state.friends.length),
@@ -44,12 +46,27 @@ export const reducer = (state, action) => {
         ...state,
         friends: [newFriend, ...state.friends],
       };
-    case REMOVE_FRIEND:
+    }
+    case REMOVE_FRIEND: {
       const { id } = action.payload;
       return {
         ...state,
         friends: state.friends.filter((friend) => friend.id !== id),
       };
+    }
+    case EDIT_FRIEND: {
+      const { id, name, timezone } = action.payload;
+      const friendToEdit = state.friends.find((friend) => friend.id === id);
+      const editedFriend = {
+        ...friendToEdit,
+        name,
+        timezone
+      }
+      return {
+        ...state,
+        friends: state.friends.map((friend) => friend.id === id ? editedFriend : friend),
+      };
+    }
     default:
       throw new Error();
   }

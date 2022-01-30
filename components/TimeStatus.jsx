@@ -31,7 +31,7 @@ export default function TimeStatus({ timezone }) {
   const offsetHours = msToHours(offset + state.localOffset);
 
   return (
-    <HStack spacing={{ base: 2, sm: 3, md: 4, lg: 6 }}>
+    <HStack spacing={{ base: 2, sm: 3, md: 4, lg: 6 }} mr={{ base: 1, md: 2 }}>
       <Heading
         color={isAwake ? "yellow.400" : "gray.600"}
         fontSize={{ base: "sm", sm: "md", md: "lg", lg: "xl" }}
@@ -45,7 +45,6 @@ export default function TimeStatus({ timezone }) {
       <Text as='kbd' fontSize={{ base: "xs", sm: "sm", md: "md", lg: "lg" }}>
         {offsetHours >= 0 ? `+${offsetHours}` : offsetHours}h
       </Text>
-      ;
     </HStack>
   );
 }
