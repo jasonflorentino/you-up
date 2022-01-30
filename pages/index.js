@@ -18,6 +18,7 @@ import { AddIcon } from "@chakra-ui/icons";
 
 import NewFriendForm from "../components/NewFriendForm";
 import Friend from "../components/Friend";
+import ColorModeToggle from "../components/ColorModeToggle";
 import { useAppContext, TimezoneContext } from "../appState/AppContext";
 import {
   SET_LOCAL_OFFSET,
@@ -95,6 +96,7 @@ export default function Home({ timeZones }) {
               <Heading size="lg">⏰ You Up?</Heading>
             </HStack>
             <HStack p={4} justifyContent={"flex-end"}>
+              <ColorModeToggle />
               <Button
                 size={addButtonSizes}
                 onClick={() => setShowForm(true)}
