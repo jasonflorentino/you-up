@@ -5,7 +5,6 @@ import {
   Button,
   VStack,
   StackDivider,
-  Heading,
   HStack,
   Modal,
   ModalOverlay,
@@ -16,9 +15,11 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
-import NewFriendForm from "../components/NewFriendForm";
-import Friend from "../components/Friend";
 import ColorModeToggle from "../components/ColorModeToggle";
+import Friend from "../components/Friend";
+import Logo from "../components/Logo";
+import NewFriendForm from "../components/NewFriendForm";
+
 import { useAppContext, TimezoneContext } from "../appState/AppContext";
 import {
   SET_LOCAL_OFFSET,
@@ -93,7 +94,7 @@ export default function Home({ timeZones }) {
           </Head>
           <main>
             <HStack p={4} justifyContent='space-between'>
-              <Heading size="lg">⏰ You Up?</Heading>
+              <Logo />
               <ColorModeToggle />
             </HStack>
             <HStack p={4} justifyContent={"flex-end"}>
