@@ -16,7 +16,6 @@ export const actions = {
   ADD_NEW_FRIEND,
   REMOVE_FRIEND,
   EDIT_FRIEND,
-  SET_WAKETIME,
   SET_AWAKETIMES,
 };
 

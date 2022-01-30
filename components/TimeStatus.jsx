@@ -60,6 +60,9 @@ function checkIfAwake(state, hours, minutes) {
   if (hours > state.sleepTime[0]) {
     return false;
   }
+  if (hours === state.wakeTime[0] && hours === state.sleepTime[0]) {
+    return minutes < state.sleepTime[1]
+  }
   if (hours === state.wakeTime[0]) {
     return minutes >= state.wakeTime[1]
   }

@@ -12,9 +12,11 @@ import {
   ModalHeader,
   ModalCloseButton,
   useBreakpointValue,
+  Text,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
+import AwakeTimePicker from "../components/AwakeTimePicker";
 import ColorModeToggle from "../components/ColorModeToggle";
 import Friend from "../components/Friend";
 import Logo from "../components/Logo";
@@ -34,7 +36,8 @@ const STORAGE_NAME = "youUp";
  */
 export default function Home({ timezones }) {
   const { state, dispatch } = useAppContext();
-  const [showForm, setShowForm] = useState(false);
+  const [showNewFriendForm, setShowNewFriendForm] = useState(false);
+  const [showAwakeTimesInput, setShowAwakeTimesInput] = useState(false);
 
   useEffect(() => {
     const localOffsetMs = new Date().getTimezoneOffset() * 60 * 1000;
@@ -62,14 +65,14 @@ export default function Home({ timezones }) {
         type: ADD_NEW_FRIEND,
         payload: { name, timezone },
       });
-      setShowForm(false);
+      setShowNewFriendForm(false);
     },
-    [dispatch, setShowForm]
+    [dispatch, setShowNewFriendForm]
   );
 
   const handleCancel = useCallback(() => {
-    setShowForm(false);
-  }, [setShowForm]);
+    setShowNewFriendForm(false);
+  }, [setShowNewFriendForm]);
 
   const memoizedFriendForm = useMemo(
     () => (
@@ -81,7 +84,10 @@ export default function Home({ timezones }) {
     [handleAddNewFriend, handleCancel]
   );
 
-  const addButtonSizes = useBreakpointValue({ base: "sm", sm: 'md', md: "lg" });
+  const addButtonSizes = useBreakpointValue({ base: "sm", sm: "md", md: "lg" });
+  const {wakeTime, sleepTime} = state;
+  const [wakeH, wakeM] = wakeTime;
+  const [sleepH, sleepM] = sleepTime;
 
   return (
     <TimezoneContext.Provider value={timezones}>
@@ -89,18 +95,33 @@ export default function Home({ timezones }) {
         <Flex flexDirection="column" w={"100%"} maxW={"1080px"}>
           <Head>
             <title>You Up?</title>
-            <meta name="description" content="Check if your friends in different timezones are up." />
-            <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏰</text></svg>" />
+            <meta
+              name="description"
+              content="Check if your friends in different timezones are up."
+            />
+            <link
+              rel="icon"
+              href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏰</text></svg>"
+            />
           </Head>
           <main>
-            <HStack p={4} justifyContent='space-between'>
+            <HStack p={4} justifyContent="space-between">
               <Logo />
               <ColorModeToggle />
             </HStack>
-            <HStack p={4} justifyContent={"flex-end"}>
+            <HStack p={4} justifyContent={"space-between"}>
               <Button
                 size={addButtonSizes}
-                onClick={() => setShowForm(true)}
+                variant={'outline'}
+                colorScheme={'blue'}
+                onClick={() => setShowAwakeTimesInput(true)}
+              >
+                <Text as='kbd'>👋 {formatTime(wakeH, wakeM)} - {formatTime(sleepH, sleepM)}</Text>
+              </Button>
+              <Button
+                size={addButtonSizes}
+                colorScheme={'yellow'}
+                onClick={() => setShowNewFriendForm(true)}
                 leftIcon={<AddIcon />}
               >
                 New Friend
@@ -119,7 +140,16 @@ export default function Home({ timezones }) {
               </VStack>
             </ul>
 
-            <Modal isOpen={showForm} size={"2xl"} onClose={handleCancel}>
+            <AwakeTimePicker
+              isOpen={showAwakeTimesInput}
+              onClose={() => setShowAwakeTimesInput(false)}
+            />
+
+            <Modal
+              isOpen={showNewFriendForm}
+              size={"2xl"}
+              onClose={handleCancel}
+            >
               <ModalOverlay />
               <ModalContent>
                 <ModalHeader>Add A New Friend</ModalHeader>
@@ -168,4 +198,11 @@ export async function getStaticProps() {
       timezones: Object.fromEntries(timezones),
     },
   };
+}
+
+
+function formatTime(h, m) {
+  const hours = h < 10 ? '0' + h : h;
+  const mins = m < 10 ? '0' + m : m;
+  return `${hours}:${mins}`;
 }
