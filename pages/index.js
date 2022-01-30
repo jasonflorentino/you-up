@@ -127,8 +127,8 @@ export default function Home({ timeZones }) {
 
 export async function getStaticProps() {
   /* API REFERENCE: https://timezonedb.com/references/list-time-zone */
-  const key = process.env.NEXT_PUBLIC_TIMEZONE_API_KEY;
-  const url = process.env.NEXT_PUBLIC_TIMEZONE_API_URL;
+  const key = process.env.TIMEZONE_API_KEY;
+  const url = process.env.TIMEZONE_API_URL;
   const fields = "zoneName,gmtOffset";
   const req = await fetch(
     `https://${url}?format=json&fields=${fields}&key=${key}`
