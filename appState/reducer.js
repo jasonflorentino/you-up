@@ -35,7 +35,7 @@ export const reducer = (state, action) => {
     case LOAD_STATE:
       return {
         ...initialState,
-        ...action.payload
+        ...action.payload,
       };
     case SET_LOCAL_OFFSET:
       return {
@@ -67,11 +67,13 @@ export const reducer = (state, action) => {
       const editedFriend = {
         ...friendToEdit,
         name,
-        timezone
-      }
+        timezone,
+      };
       return {
         ...state,
-        friends: state.friends.map((friend) => friend.id === id ? editedFriend : friend),
+        friends: state.friends.map((friend) =>
+          friend.id === id ? editedFriend : friend
+        ),
       };
     }
     case SET_AWAKETIMES: {
@@ -79,8 +81,8 @@ export const reducer = (state, action) => {
       return {
         ...state,
         wakeTime,
-        sleepTime
-      }
+        sleepTime,
+      };
     }
     default:
       throw new Error();

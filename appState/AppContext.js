@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useMemo,
-  useReducer,
-} from "react";
+import { createContext, useContext, useMemo, useReducer } from "react";
 import { reducer, initialState } from "./reducer";
 
 const AppContext = createContext();
@@ -20,9 +15,7 @@ export function AppWrapper({ children }) {
   }, [state, dispatch]);
 
   return (
-    <AppContext.Provider value={contextValue}>
-        {children}
-    </AppContext.Provider>
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );
 }
 

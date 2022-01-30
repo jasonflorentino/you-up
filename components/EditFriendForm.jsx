@@ -21,9 +21,9 @@ export default function NewFriendForm({ id, name, timezone, handleCancel }) {
       payload: {
         id,
         name: nameInput,
-        timezone: timezoneInput
-      }
-    })
+        timezone: timezoneInput,
+      },
+    });
     handleCancel();
   };
 

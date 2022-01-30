@@ -12,7 +12,7 @@ export default function ColorModeToggle() {
       onClick={toggleColorMode}
       icon={icon}
       size={buttonSizes}
-      variant={'ghost'}
+      variant={"ghost"}
     />
   );
 }

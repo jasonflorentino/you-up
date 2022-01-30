@@ -61,13 +61,13 @@ function checkIfAwake(state, hours, minutes) {
     return false;
   }
   if (hours === state.wakeTime[0] && hours === state.sleepTime[0]) {
-    return minutes < state.sleepTime[1]
+    return minutes < state.sleepTime[1];
   }
   if (hours === state.wakeTime[0]) {
-    return minutes >= state.wakeTime[1]
+    return minutes >= state.wakeTime[1];
   }
   if (hours === state.sleepTime[0]) {
-    return minutes < state.sleepTime[1]
+    return minutes < state.sleepTime[1];
   }
   return true;
 }

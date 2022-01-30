@@ -5,12 +5,11 @@ import {
   ModalContent,
   ModalHeader,
   ModalCloseButton,
-  Flex,
   VStack,
   HStack,
   Button,
   Heading,
-  useBreakpointValue
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 import { useAppContext } from "../appState/AppContext";
@@ -56,8 +55,11 @@ export default function AwakeTimePicker({ isOpen, onClose }) {
   };
 
   const isValid = isAwakeTimeValid(newWakeTime, newSleepTime);
-  const headingStyles = { as: "h4", fontSize: {base: "sm", sm: 'md', md: 'lg' } };
-  const modalSizes = useBreakpointValue({base: 'xs', sm:'sm', md: "2xl"})
+  const headingStyles = {
+    as: "h4",
+    fontSize: { base: "sm", sm: "md", md: "lg" },
+  };
+  const modalSizes = useBreakpointValue({ base: "xs", sm: "sm", md: "2xl" });
 
   return (
     <Modal isOpen={isOpen} size={modalSizes} onClose={handleCanel}>
@@ -92,12 +94,16 @@ export default function AwakeTimePicker({ isOpen, onClose }) {
               Cancel
             </Button>
 
-            <Button w={"100%"} colorScheme={'blue'} onClick={handleSubmit} disabled={!isValid}>
+            <Button
+              w={"100%"}
+              colorScheme={"blue"}
+              onClick={handleSubmit}
+              disabled={!isValid}
+            >
               Submit
             </Button>
           </HStack>
         </VStack>
-
       </ModalContent>
     </Modal>
   );

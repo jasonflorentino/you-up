@@ -43,7 +43,6 @@ export default function AlertDialogBox({
     >
       <AlertDialogOverlay>
         <AlertDialogContent>
-          
           <AlertDialogHeader
             fontSize={{ base: "lg", md: "xl", lg: "2xl" }}
             fontWeight="bold"
@@ -51,9 +50,7 @@ export default function AlertDialogBox({
             {headerText}
           </AlertDialogHeader>
 
-          <AlertDialogBody>
-            {bodyText}
-          </AlertDialogBody>
+          <AlertDialogBody>{bodyText}</AlertDialogBody>
 
           <AlertDialogFooter>
             <Button size={buttonSizes} ref={onCancelRef} onClick={handleClose}>
@@ -68,7 +65,6 @@ export default function AlertDialogBox({
               {confirmText}
             </Button>
           </AlertDialogFooter>
-
         </AlertDialogContent>
       </AlertDialogOverlay>
     </AlertDialog>

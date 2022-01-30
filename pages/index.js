@@ -85,7 +85,7 @@ export default function Home({ timezones }) {
   );
 
   const addButtonSizes = useBreakpointValue({ base: "sm", sm: "md", md: "lg" });
-  const {wakeTime, sleepTime} = state;
+  const { wakeTime, sleepTime } = state;
   const [wakeH, wakeM] = wakeTime;
   const [sleepH, sleepM] = sleepTime;
 
@@ -112,15 +112,17 @@ export default function Home({ timezones }) {
             <HStack p={4} justifyContent={"space-between"}>
               <Button
                 size={addButtonSizes}
-                variant={'outline'}
-                colorScheme={'blue'}
+                variant={"outline"}
+                colorScheme={"blue"}
                 onClick={() => setShowAwakeTimesInput(true)}
               >
-                <Text as='kbd'>👋 {formatTime(wakeH, wakeM)} - {formatTime(sleepH, sleepM)}</Text>
+                <Text as="kbd">
+                  👋 {formatTime(wakeH, wakeM)} - {formatTime(sleepH, sleepM)}
+                </Text>
               </Button>
               <Button
                 size={addButtonSizes}
-                colorScheme={'yellow'}
+                colorScheme={"yellow"}
                 onClick={() => setShowNewFriendForm(true)}
                 leftIcon={<AddIcon />}
               >
@@ -200,9 +202,8 @@ export async function getStaticProps() {
   };
 }
 
-
 function formatTime(h, m) {
-  const hours = h < 10 ? '0' + h : h;
-  const mins = m < 10 ? '0' + m : m;
+  const hours = h < 10 ? "0" + h : h;
+  const mins = m < 10 ? "0" + m : m;
   return `${hours}:${mins}`;
 }
