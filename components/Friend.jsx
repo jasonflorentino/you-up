@@ -1,16 +1,9 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import {
   Flex,
-  Checkbox,
   Heading,
   Spacer,
   IconButton,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
   Button,
   useBreakpointValue,
 } from "@chakra-ui/react";
@@ -19,10 +12,10 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import { useAppContext } from "../appState/AppContext";
 import { REMOVE_FRIEND } from "../appState/reducer";
 import TimeStatus from "./TimeStatus";
+import AlertDialogBox from "./AlertDialogBox";
 
 export default function Friend({ friend }) {
   const [alert, setAlert] = useState(false);
-  const onCancelRef = useRef();
   const { dispatch } = useAppContext();
   const { name, timezone, id } = friend;
   const sizes = useBreakpointValue({ base: "sm", md: "md" });
@@ -41,10 +34,6 @@ export default function Friend({ friend }) {
       payload: { id },
     });
   };
-
-  const dialogSizes = useBreakpointValue({ base: "xs", md: "sm", lg: "lg" });
-  const buttonSizes = useBreakpointValue({ base: "sm", md: "md", lg: "lg" });
-  const modalCentering = useBreakpointValue({ base: true, lg: false })
 
   return (
     <li>
@@ -65,47 +54,14 @@ export default function Friend({ friend }) {
         />
       </Flex>
 
-      <AlertDialog
+      <AlertDialogBox
         isOpen={alert}
-        leastDestructiveRef={onCancelRef}
+        onConfirm={onConfirmDelete}
         onClose={handleClose}
-        size={dialogSizes}
-        isCentered={modalCentering}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader
-              fontSize={{ base: "lg", md: "xl", lg: "2xl" }}
-              fontWeight="bold"
-            >
-              See ya!
-            </AlertDialogHeader>
-
-            <AlertDialogBody>
-              Are you sure you want to remove this friend? You can&apos;t undo
-              this action.
-            </AlertDialogBody>
-
-            <AlertDialogFooter>
-              <Button
-                size={buttonSizes}
-                ref={onCancelRef}
-                onClick={handleClose}
-              >
-                Cancel
-              </Button>
-              <Button
-                size={buttonSizes}
-                colorScheme="red"
-                onClick={onConfirmDelete}
-                ml={3}
-              >
-                Remove
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+        headerText="See ya!"
+        bodyText="Are you sure you want to remove this friend? You can&apos;t undo this action."
+        confirmText="Remove"
+      />
     </li>
   );
 }
