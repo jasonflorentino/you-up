@@ -1,34 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ⏰ You Up?
+***Quickly check if you can ring your remote friends***
 
-## Getting Started
+## What is this?
+My friend Steve told me he was looking for a quick and simple way to check who among his distributed friend group might be up for a chat. Me, always wanting a side-project, said "Why don't I make something for that!". And, so that's what I ended up doing this weekend. Enjoy!
 
-First, run the development server:
+— Jason, Jan 30, 2021
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Live Site
+[Click here](https://youup.vercel.app/) to view the live app.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How Does It Work?
+You tell it where your friend is, and it'll tell you if they're awake.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### First, a note about security
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+The app runs entirely in the browser and stores the data you give it in your browser's `localstorage`. This is great because no data is being sent anywhere and yet your list of friends persists across reloads and revists. However, `localstorage` is not a secure store. Apps and sites in other tabs also have access to `localstorage`. Don't input anything you wouldn't mind them (or anyone else for that matter) seeing. Consider this open to anyone who wants to see it.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### And now the rest
 
-## Learn More
+- **Add a friend** by clicking the `+ New Friend` button, give them a name, and choose what timezone they're in. (This app gets its timezone data from a free web API: https://timezonedb.com/)
+- By default if it's between **7am and 11pm** where they are, they're considered awake. You can change this by clicking the button displaying these times: `👋 07:00 -  23:00`. This is a global change and will affect everybody in the list.
+- Their time is calculated **relative to your current time**, and your current time will be the time on whatever device you're using. I haven't been able to test this yet, but if you add people while in Eastern Time, and then access this site from the same device while in Pacific Time, your friends' awake status should adjust accordingly!
+- You can **edit a friend's defailts** by clicking the `edit` icon between to their time difference and the `trash` icon.
+- Clicking the `trash` icon (last in their row) **removes a friend**.
 
-To learn more about Next.js, take a look at the following resources:
+## Future Ideas, maybe:
+- Collapse friend actions into single menu, so as to remove clutter from individual rows.
+- Put global settings in a settings dialog.
+- Add attribution / link to repo somewhere.
+- Configure Awake time for individual friends.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Nerdy Details
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- This a [NextJs](https://nextjs.org/) app built with plain JavaScript and [ChakraUI](https://chakra-ui.com/)
