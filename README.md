@@ -14,7 +14,7 @@ You tell it where your friend is, and it'll tell you if they're awake!
 
 ### First, a note about security
 
-The app runs entirely in the browser and stores the stuff you give it in your browser's `localstorage`. This is great because no data is being sent anywhere, and yet your list of friends persists across reloads and revists. However, **`localstorage` is not a secure store.** Apps and sites in other tabs also have access to `localstorage` — Don't input anything you wouldn't mind them (or anyone else for that matter) seeing. Although it all lives in your browser, consider this data open to anybody who wants to find it.
+The app runs entirely in the browser and stores the stuff you give it in your browser's `localstorage`. This is great because no data is being sent anywhere, and yet your list of friends can persist across reloads and revists. However, **`localstorage` is not a secure store.** While the `localstorage` object the browser gives us is specific to this URL, it's unencrypted and freely accessible to anyone with physical access to the device — Don't store any sensitive information in here. This also means that if you clear your browser data/cache, you may lose your list!
 
 ### And now the rest
 
