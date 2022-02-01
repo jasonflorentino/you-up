@@ -21,6 +21,7 @@ import ColorModeToggle from "../components/ColorModeToggle";
 import Friend from "../components/Friend";
 import Logo from "../components/Logo";
 import NewFriendForm from "../components/NewFriendForm";
+import EmptyList from "../components/EmptyList";
 
 import { useAppContext, TimezoneContext } from "../appState/AppContext";
 import {
@@ -88,6 +89,7 @@ export default function Home({ timezones }) {
   const { wakeTime, sleepTime } = state;
   const [wakeH, wakeM] = wakeTime;
   const [sleepH, sleepM] = sleepTime;
+  const isEmpty = state.friends.length === 0;
 
   return (
     <TimezoneContext.Provider value={timezones}>
@@ -129,18 +131,23 @@ export default function Home({ timezones }) {
                 New Friend
               </Button>
             </HStack>
-            <ul>
-              <VStack
-                p={4}
-                divider={<StackDivider borderColor="gray.200" />}
-                spacing={4}
-                align="stretch"
-              >
-                {state.friends.map((friend) => (
-                  <Friend key={friend.id} friend={friend} />
-                ))}
-              </VStack>
-            </ul>
+
+            {isEmpty ? (
+              <EmptyList />
+            ) : (
+              <ul>
+                <VStack
+                  p={4}
+                  divider={<StackDivider borderColor="gray.200" />}
+                  spacing={4}
+                  align="stretch"
+                >
+                  {state.friends.map((friend) => (
+                    <Friend key={friend.id} friend={friend} />
+                  ))}
+                </VStack>
+              </ul>
+            )}
 
             <AwakeTimePicker
               isOpen={showAwakeTimesInput}
