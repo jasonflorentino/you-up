@@ -1,27 +1,6 @@
 import { useState } from "react";
-import {
-  Button,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerHeader,
-  DrawerBody,
-  Heading,
-  HStack,
-  IconButton,
-  Kbd,
-  Link,
-  Spacer,
-  Text,
-  useBreakpointValue,
-  useColorMode,
-  VStack,
-} from "@chakra-ui/react";
-import {
-  QuestionOutlineIcon,
-  CloseIcon,
-  ExternalLinkIcon,
-} from "@chakra-ui/icons";
+import { HStack, IconButton, useBreakpointValue } from "@chakra-ui/react";
+import { QuestionOutlineIcon } from "@chakra-ui/icons";
 
 import AboutDrawer from "./AboutDrawer";
 import ColorModeToggle from "./ColorModeToggle";
@@ -30,7 +9,7 @@ import Logo from "./Logo";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const buttonSizes = useBreakpointValue({ base: "sm", sm: "md", md: "lg" });
-  
+
   return (
     <>
       <AboutDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
