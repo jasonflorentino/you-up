@@ -16,15 +16,16 @@ import {
 } from "@chakra-ui/react";
 import { CloseIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 
-export default function AboutDrawer({isOpen, setIsOpen}) {
+export default function AboutDrawer({ isOpen, setIsOpen }) {
   const buttonSizes = useBreakpointValue({ base: "sm", sm: "md", md: "lg" });
+  const drawerSizes = useBreakpointValue({ base: "full", lg: "xl" });
   const { colorMode } = useColorMode();
   const isLight = colorMode === "light";
 
   return (
-    <Drawer onClose={() => setIsOpen(false)} isOpen={isOpen} size={"full"}>
+    <Drawer onClose={() => setIsOpen(false)} isOpen={isOpen} size={drawerSizes}>
       <DrawerOverlay />
-      <DrawerContent background={isLight ? 'gray.50' : 'gray.700'}>
+      <DrawerContent background={isLight ? "gray.50" : "gray.700"}>
         <DrawerHeader>
           <HStack alignItems={"flex-start"} justifyContent={"flex-end"}>
             <IconButton
@@ -36,14 +37,21 @@ export default function AboutDrawer({isOpen, setIsOpen}) {
             />
           </HStack>
         </DrawerHeader>
-        <DrawerBody color={isLight ? "gray.700" : "gray.200"}>
+        <DrawerBody
+          color={isLight ? "gray.700" : "gray.200"}
+          pb={{ base: 10, lg: 0 }}
+          p={{ lg: 12 }}
+          overflowY={"auto"}
+        >
           <VStack
-            h={"100%"}
-            py={4}
-            justifyContent={"flex-end"}
+            h={{ base: "120%", lg: "100%" }}
+            py={{ base: 4, lg: 0 }}
+            justifyContent={"flex-start"}
             alignItems={"flex-start"}
+            maxW={{ base: "auto", lg: "66%" }}
           >
             <Heading
+              mt={{ lg: 44 }}
               lineHeight={1.1}
               color={isLight ? "blue.600" : "yellow.200"}
             >
@@ -68,7 +76,7 @@ export default function AboutDrawer({isOpen, setIsOpen}) {
               </Link>
             </HStack>
             <Spacer />
-            <Text>
+            <Text pb={{ base: 10, lg: 0 }}>
               This app runs entirely in your browser and stores your list of
               friends in the browser&apos;s <Text as="samp">localstorage</Text>.
               This is great because no data is being sent anywhere, and yet your
