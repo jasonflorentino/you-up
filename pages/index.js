@@ -17,9 +17,8 @@ import {
 import { AddIcon } from "@chakra-ui/icons";
 
 import AwakeTimePicker from "../components/AwakeTimePicker";
-import ColorModeToggle from "../components/ColorModeToggle";
 import Friend from "../components/Friend";
-import Logo from "../components/Logo";
+import Header from "../components/Header";
 import NewFriendForm from "../components/NewFriendForm";
 import EmptyList from "../components/EmptyList";
 
@@ -107,10 +106,7 @@ export default function Home({ timezones }) {
             />
           </Head>
           <main>
-            <HStack p={4} justifyContent="space-between">
-              <Logo />
-              <ColorModeToggle />
-            </HStack>
+            <Header />
             <HStack p={4} justifyContent={"space-between"}>
               <Button
                 size={addButtonSizes}

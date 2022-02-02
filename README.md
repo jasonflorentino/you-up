@@ -27,12 +27,10 @@ The app runs entirely in the browser and stores the stuff you give it in your br
 ## Future Ideas, maybe:
 
 _In no particular order_
-- Empty state.
 - Add a sample image of the page to this doc.
 - Add name to the delete confirmation dialog.
 - Collapse friend actions into single menu, so as to remove clutter from individual rows.
 - Put global settings in a settings dialog.
-- Add attribution / link to repo somewhere.
 - Configure Awake time for individual friends.
 
 ## Nerdy Details

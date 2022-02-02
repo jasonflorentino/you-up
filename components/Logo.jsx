@@ -1,5 +1,11 @@
-import { Heading } from "@chakra-ui/react";
+import { Heading, useColorMode } from "@chakra-ui/react";
 
 export default function Logo() {
-  return <Heading size="lg">⏰ You Up?</Heading>;
+  const { colorMode } = useColorMode();
+  const isLight = colorMode === "light";
+  return (
+    <Heading color={isLight ? "blue.700" : "yellow.200"} size="lg">
+      ⏰ You Up?
+    </Heading>
+  );
 }
