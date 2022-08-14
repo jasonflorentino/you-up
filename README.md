@@ -26,6 +26,8 @@ The app runs entirely in the browser and stores the stuff you give it in your br
 
 ## Future Ideas, maybe:
 
+- Setup some sort of cache cache for the timezone data so that we can automatically keep it up to date (see below), but without running into rate limits for that service.
+
 _In no particular order_
 - Add a sample image of the page to this doc.
 - Add name to the delete confirmation dialog.
