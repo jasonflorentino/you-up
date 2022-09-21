@@ -21,7 +21,7 @@ The app runs entirely in the browser and stores the stuff you give it in your br
 - **Add a friend** by clicking the `+ New Friend` button, give them a name, and choose what timezone they're in. (This app gets its timezone data from [a free web API](https://timezonedb.com/))
 - By default if it's between **7am and 11pm** where they are, they're considered awake. You can change this by clicking the button displaying these times: `👋 07:00 -  23:00`. This is a global change and will affect everybody in the list.
 - Your friends' times are calculated **relative to your current time**, and your current time will be the time on whatever device you're using. I haven't been able to test this yet, but if you add people while in Eastern Time, and then access this site from the same device while in Pacific Time, your friends' awake status should adjust accordingly!
-- You can **edit a friend's defailts** by clicking the `edit` icon between to their time difference and the `trash` icon.
+- You can **edit a friend's details** by clicking the `edit` icon between to their time difference and the `trash` icon.
 - Clicking the `trash` icon (last in their row) **removes that friend**.
 
 ## Future Ideas, maybe:
